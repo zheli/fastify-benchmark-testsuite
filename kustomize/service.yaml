@@ -4,7 +4,9 @@ metadata:
   name: api
   annotations:
     cloud.google.com/backend-config: '{"default": "api-backendconfig"}'
+    cloud.google.com/neg: '{"ingress": true}'
 spec:
+  type: ClusterIP
   selector:
     app: fastify-benchmark
   ports:

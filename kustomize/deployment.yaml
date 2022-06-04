@@ -16,6 +16,8 @@ spec:
       containers:
         - name: server
           image: ghcr.io/zheli/fastify-benchmark:main
+          ports:
+            - containerPort: 8080
           livenessProbe:
             failureThreshold: 3
             httpGet:

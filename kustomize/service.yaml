@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: api
   annotations:
-    cloud.google.com/neg: '{"ingress": true}'
+    cloud.google.com/backend-config: '{"default": "api-backendconfig"}'
 spec:
   selector:
     app: fastify-benchmark

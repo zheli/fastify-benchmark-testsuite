@@ -3,13 +3,8 @@ kind: Ingress
 metadata:
   name: api-ingress
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /*
-        pathType: ImplementationSpecific
-        backend:
-          service:
-            name: api
-            port:
-              number: 8080
+  defaultBackend:
+    service:
+      name: api
+      port:
+        number: 8080

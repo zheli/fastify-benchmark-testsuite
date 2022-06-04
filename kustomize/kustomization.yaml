@@ -1,3 +1,4 @@
+namespace: backend
 resources:
   - deployment.yaml
   - service-account.yaml

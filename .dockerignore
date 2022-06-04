@@ -2,4 +2,5 @@
 .github/
 node_modules/
 
+kustomize/
 README.md

@@ -1,10 +1,10 @@
 const knex = require("knex")({
   client: "pg",
   connection: {
-    host: "tfb-database",
-    user: "benchmarkdbuser",
-    password: "benchmarkdbpass",
-    database: "hello_world"
+    host: "postgres-postgresql",
+    user: "backend",
+    password: "backend",
+    database: "backend"
   }
 });
 

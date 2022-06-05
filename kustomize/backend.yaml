@@ -4,6 +4,6 @@ metadata:
   name: api-backendconfig
 spec:
   healthCheck:
-    protocol: HTTP
+    type: HTTP
     requestPath: /plaintext
     port: 8080

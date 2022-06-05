@@ -4,6 +4,8 @@ metadata:
   name: api-backendconfig
 spec:
   healthCheck:
+    checkIntervalSec: 1
+    timeoutSec: 1
     type: HTTP
     requestPath: /plaintext
     port: 8080

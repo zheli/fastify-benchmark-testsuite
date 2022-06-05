@@ -33,6 +33,7 @@ jobs:
 
 
     - name: Build and push Docker image
+      id: docker
       uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
       with:
         context: .
@@ -40,3 +41,13 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Update image version in kustomize
+      uses: fjogeleit/yaml-update-action@main
+      with:
+        valueFile: 'kustomize/kustomization.yaml'
+        propertyPath: 'images.digest[0]'
+        value: ${{ steps.docker.outputs.digest}}
+        branch: deployment
+        createPR: false
+        message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'

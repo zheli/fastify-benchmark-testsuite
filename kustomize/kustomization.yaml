@@ -4,3 +4,6 @@ resources:
   - service-account.yaml
   - service.yaml
   - ingress.yaml
+images:
+- name: ghcr.io/zheli/fastify-benchmark:main
+  digest: sha256:950e4b7002670a6a294ef3e6550280f072f2abafd6b6199192b6a0debf890a5c

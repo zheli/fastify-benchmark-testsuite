@@ -32,6 +32,9 @@ fastify.get("/json", {
 });
 
 fastify.get("/plaintext", (req, reply) => {
+  console.log(
+    `Got request: ${req} on /plaintext endpoint ${new Date().toISOString()}`
+  );
   reply
     .header("Content-Type", "text/plain")
     .code(200)

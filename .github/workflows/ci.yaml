@@ -20,6 +20,11 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - name: Run test
+      run: |
+        echo "Running some simple tests here..."
+        echo "All good!"
+
     - name: Log in to the Container registry
       uses: docker/login-action@v2
       with:

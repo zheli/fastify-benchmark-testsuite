@@ -63,12 +63,11 @@ jobs:
     - name: Update image version in kustomize
       uses: fjogeleit/yaml-update-action@v0.10.0
       with:
-        valueFile: 'deploy-config/kubernetes/argocd-applications/backend.yaml'
+        valueFile: 'kubernetes/argocd-applications/backend.yaml'
         propertyPath: 'spec.source.helm.parameters[0].value'
         value: ${{ steps.docker.outputs.digest}}
         repository: zheli/deversifi
         token: ${{ secrets.BOT_PAT }}
-        workDir: deploy-config
         branch: main
         createPR: false
         message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'

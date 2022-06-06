@@ -2,5 +2,5 @@
 .github/
 node_modules/
 
-kustomize/
+chart/
 README.md

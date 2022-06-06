@@ -48,11 +48,6 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-    # so that we get the remote repository digest instead of local digest
-    - name: Get image digest
-      id: digest
-      run: echo "::set-output name=digest::$(docker inspect ${{ steps.build.outputs.digest }} | jq -r '.[].RepoDigests[0] | split("@") | .[1]')"
-
     - name: Checkout deployment Repository
       uses: actions/checkout@v2
       with:
@@ -60,22 +55,12 @@ jobs:
         path: deploy-config
         token: ${{ secrets.BOT_PAT }}
 
-    - name: printout docker imageid output
-      run: echo "${{ steps.docker.outputs.digest}}"
-
-    - name: Check digest
-      run: |
-        if [ -z "${{ steps.docker.outputs.digest }}" ]; then
-        echo "::error::Digest should not be empty"
-        exit 1
-        fi
-
     - name: Update image digest
       uses: fjogeleit/yaml-update-action@v0.10.0
       with:
         valueFile: 'kubernetes/argocd-applications/backend.yaml'
         propertyPath: 'spec.source.helm.parameters[0].value'
-        value: ${{ steps.digest.outputs.digest}}
+        value: ${{ steps.docker.outputs.digest}}
         repository: zheli/deversifi
         token: ${{ secrets.BOT_PAT }}
         workDir: deploy-config

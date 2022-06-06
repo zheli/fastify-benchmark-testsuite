@@ -36,7 +36,7 @@ jobs:
           type=ref,event=branch
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}
-          type=sha
+          type=sha, format=long
 
     - name: Build and push Docker image
       id: docker
@@ -55,8 +55,15 @@ jobs:
         path: deploy-config
         token: ${{ secrets.BOT_PAT }}
 
-    - name: printout docker output
-      run: echo "${{ steps.docker.outputs }}"
+    - name: printout docker imageid output
+      run: echo "${{ steps.docker.outputs.imageid }}"
+
+    - name: Check imageid
+      run: |
+        if [ -z "${{ steps.docker.outputs.imageid }}" ]; then
+        echo "::error::ImageId should not be empty"
+        exit 1
+        fi
 
     - name: Check digest
       run: |

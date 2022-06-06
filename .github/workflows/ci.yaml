@@ -48,12 +48,12 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-    # - name: Checkout deployment Repository
-    #   uses: actions/checkout@v2
-    #   with:
-    #     repository: zheli/deversifi
-    #     path: deploy-config
-    #     token: ${{ secrets.BOT_PAT }}
+    - name: Checkout deployment Repository
+      uses: actions/checkout@v2
+      with:
+        repository: zheli/deversifi
+        path: deploy-config
+        token: ${{ secrets.BOT_PAT }}
 
     # - name: Update image tag
     #   run: |
@@ -68,6 +68,7 @@ jobs:
         value: ${{ steps.docker.outputs.digest}}
         repository: zheli/deversifi
         token: ${{ secrets.BOT_PAT }}
+        workDir: deploy-config
         branch: main
         masterBranchName: main
         targetBranch: main

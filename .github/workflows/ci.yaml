@@ -48,12 +48,19 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-    - name: Update image version in kustomize
-      uses: fjogeleit/yaml-update-action@main
+    - name: Checkout deployment Repository
+      uses: actions/checkout@v2
       with:
-        valueFile: 'kustomize/kustomization.yaml'
-        propertyPath: 'images.digest[0]'
-        value: ${{ steps.docker.outputs.digest}}
-        branch: deployment
-        createPR: false
-        message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'
+        repository: zheli/deversifi
+        path: deploy-config
+        token: ${{ secrets.BOT_PAT }}
+
+    # - name: Update image version in kustomize
+    #   uses: fjogeleit/yaml-update-action@v0.10.0
+    #   with:
+    #     valueFile: 'chart/values.yaml'
+    #     propertyPath: 'images.digest[0]'
+    #     value: ${{ steps.docker.outputs.digest}}
+    #     branch: deployment
+    #     createPR: false
+    #     message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'

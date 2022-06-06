@@ -60,7 +60,7 @@ jobs:
       with:
         valueFile: 'kubernetes/argocd-applications/backend.yaml'
         propertyPath: 'spec.source.helm.parameters[0].value'
-        value: ${{ steps.docker.outputs.digest}}
+        value: ${{ steps.docker.outputs.imageid}}
         repository: zheli/deversifi
         token: ${{ secrets.BOT_PAT }}
         workDir: deploy-config

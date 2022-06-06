@@ -55,12 +55,7 @@ jobs:
         path: deploy-config
         token: ${{ secrets.BOT_PAT }}
 
-    # - name: Update image tag
-    #   run: |
-    #     sed -i "s/digest:\ .*$/digest:\ ${{ steps.docker.outputs.digest}}" deploy-config/kubernetes/argocd-applicants/backend.yaml
-    #     cat deploy-config/kubernetes/argocd-applicants/backend.yaml
-
-    - name: Update image version in kustomize
+    - name: Update image digest
       uses: fjogeleit/yaml-update-action@v0.10.0
       with:
         valueFile: 'kubernetes/argocd-applications/backend.yaml'

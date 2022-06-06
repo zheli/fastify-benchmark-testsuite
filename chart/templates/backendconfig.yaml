@@ -11,5 +11,5 @@ spec:
     timeoutSec: 1
     type: HTTP
     requestPath: /plaintext
-    number: {{ $svcPort }}
+    port: {{ $svcPort }}
 {{- end }}

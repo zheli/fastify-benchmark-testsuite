@@ -55,6 +55,16 @@ jobs:
         path: deploy-config
         token: ${{ secrets.BOT_PAT }}
 
+    - name: printout docker output
+      run: echo "${{ steps.docker.outputs }}"
+
+    - name: Check digest
+      run: |
+        if [ -z "${{ steps.docker.outputs.digest }}" ]; then
+        echo "::error::Digest should not be empty"
+        exit 1
+        fi
+
     - name: Update image digest
       uses: fjogeleit/yaml-update-action@v0.10.0
       with:

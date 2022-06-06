@@ -7,8 +7,7 @@ replicaCount: 1
 image:
   repository: ghcr.io/zheli/fastify-benchmark
   pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  digest: ""
 
 imagePullSecrets: []
 nameOverride: ""

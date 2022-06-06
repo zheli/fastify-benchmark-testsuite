@@ -48,19 +48,27 @@ jobs:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
 
-    - name: Checkout deployment Repository
-      uses: actions/checkout@v2
-      with:
-        repository: zheli/deversifi
-        path: deploy-config
-        token: ${{ secrets.BOT_PAT }}
-
-    # - name: Update image version in kustomize
-    #   uses: fjogeleit/yaml-update-action@v0.10.0
+    # - name: Checkout deployment Repository
+    #   uses: actions/checkout@v2
     #   with:
-    #     valueFile: 'chart/values.yaml'
-    #     propertyPath: 'images.digest[0]'
-    #     value: ${{ steps.docker.outputs.digest}}
-    #     branch: deployment
-    #     createPR: false
-    #     message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'
+    #     repository: zheli/deversifi
+    #     path: deploy-config
+    #     token: ${{ secrets.BOT_PAT }}
+
+    # - name: Update image tag
+    #   run: |
+    #     sed -i "s/digest:\ .*$/digest:\ ${{ steps.docker.outputs.digest}}" deploy-config/kubernetes/argocd-applicants/backend.yaml
+    #     cat deploy-config/kubernetes/argocd-applicants/backend.yaml
+
+    - name: Update image version in kustomize
+      uses: fjogeleit/yaml-update-action@v0.10.0
+      with:
+        valueFile: 'deploy-config/kubernetes/argocd-applications/backend.yaml'
+        propertyPath: 'spec.source.helm.parameters[0].value'
+        value: ${{ steps.docker.outputs.digest}}
+        repository: zheli/deversifi
+        token: ${{ secrets.BOT_PAT }}
+        workDir: deploy-config
+        branch: main
+        createPR: false
+        message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'

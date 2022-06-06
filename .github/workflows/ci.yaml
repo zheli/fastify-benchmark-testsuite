@@ -69,5 +69,7 @@ jobs:
         repository: zheli/deversifi
         token: ${{ secrets.BOT_PAT }}
         branch: main
+        masterBranchName: main
+        targetBranch: main
         createPR: false
         message: 'Update Image Digest to ${{ steps.docker.outputs.digest }}'
